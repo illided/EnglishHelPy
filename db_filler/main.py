@@ -1,7 +1,7 @@
 from argparse import ArgumentParser
 from configparser import ConfigParser
 
-from load_records import load_records
+from load_records import TableLoader
 from initialize_db import initialize_db
 
 
@@ -19,7 +19,7 @@ def main():
     initialize_db(config, args.is_test)
     print("Database created")
 
-    load_records(config, args.is_test)
+    TableLoader(config, args.is_test).load_records()
     print("Subtitles loaded")
 
 
