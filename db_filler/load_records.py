@@ -14,7 +14,7 @@ def fill_id(string: str, id: int):
 
 class TableLoader:
     TECHNICAL_REGEX = re.compile(r"\([^\(\)]+\)")
-    JUNK_SYMBOLS_REGEX = re.compile(r'[."\-)(,;?!:]')
+    JUNK_SYMBOLS_REGEX = re.compile(r'[."\-)(,;?!:\d]')
     FILE_URL_REGEX = re.compile(r"https:\/\/py\.tedcdn\.com\S*\.mp4")
 
     def __init__(self, config, is_test):
@@ -34,7 +34,7 @@ class TableLoader:
     def split_quote(self, quote: str) -> List[str]:
         quote = re.sub(self.JUNK_SYMBOLS_REGEX, "", quote).lower()
         doc = self.nlp(quote)
-        words = [token.lemma_ for token in doc]
+        words = [token.lemma_ for token in doc if len(token.lemma_) > 0]
         return words
 
     def create_conn(self) -> sqlite3.Connection:
@@ -122,7 +122,7 @@ class TableLoader:
 
         def fail():
             postfix["Fail"] += 1
-            curs.execute("ROLLBACK")
+            conn.rollback()
             pbar.set_postfix(postfix)
 
         def success():
