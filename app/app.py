@@ -1,6 +1,8 @@
+import re
 import sqlite3
-from typing import Optional, List, Any
+from typing import Optional, List, Tuple
 
+import requests
 import spacy
 from flask import Flask, g, request, render_template
 
@@ -30,22 +32,27 @@ def index():
     if limit is None:
         limit = 5
 
-    cur = get_db().cursor()
-    links = get_link(cur, query, limit, offset)
-    if links is None:
+    word = process_query(query)
+    if word is None:
         return render_template("error.html", message="Wrong query")
-    if len(links) == 0:
-        return render_template("error.html", message="I don't have this word in my database")
+    definition = get_definition(word)
+    cur = get_db().cursor()
+    links = get_link(cur, word, limit, offset)
     cur.close()
-    return render_template('search_result.html', links=links)
+    if len(links) == 0 and definition is None:
+        return render_template("error.html", message="Couldn't find definition or usages")
+    return render_template('search_result.html', links=links, word_analysis=definition)
 
 
-def get_link(cursor: sqlite3.Cursor, query: str, limit: int, offset: int) -> Optional[List[Any]]:
+def process_query(query: str) -> Optional[str]:
     doc = nlp(query)
     words = [w.lemma_ for w in doc]
     if len(words) != 1:
         return None
-    word = words[0]
+    return words[0]
+
+
+def get_link(cursor: sqlite3.Cursor, word: str, limit: int, offset: int) -> List[Tuple[str, str]]:
     cursor.execute(
         """
         select link, quote, start_time, end_time from words
@@ -67,6 +74,18 @@ def get_link(cursor: sqlite3.Cursor, query: str, limit: int, offset: int) -> Opt
         links.append(link + f'#t={start_shifted},{end_shifted}')
         quotes.append(quote)
     return list(zip(links, quotes))
+
+
+def get_definition(word: str) -> Optional[dict]:
+    if not re.match(r'[A-Za-z]+', word):
+        return None
+    response = requests.get(f'https://api.dictionaryapi.dev/api/v2/entries/en/{word}')
+    if not response.ok:
+        return None
+    as_json = response.json()
+    if isinstance(as_json, dict) and as_json['title'] == "No Definitions Found":
+        return None
+    return as_json[0]
 
 
 if __name__ == '__main__':

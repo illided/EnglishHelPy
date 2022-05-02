@@ -3,7 +3,29 @@
 {% block head %}{% endblock %}
 
 {% block body %}
-    {% for link, quote in links %}
-        <p class="ted_quote" ><a href="{{ link }}">"...{{ quote }}..."</a></p>
-    {% endfor %}
+    <div class="usage-results">
+        {% if word_analysis is not none %}
+            <h2 class="word_in_query">{{ word_analysis["word"]|capitalize }}</h2>
+            {% for meaning in word_analysis["meanings"] %}
+                <p>{{ loop.index }}. ({{ meaning["partOfSpeech"] }})</p>
+                {% for definition in meaning["definitions"] %}
+                    <p class="definition">{{ definition['definition'] }}</p>
+                {% endfor %}
+            {% endfor %}
+        {% endif %}
+        {% if links|length != 0 %}
+            {% for link, quote in links %}
+                <div class="ted_card">
+                    <div class="video-mask">
+                        <video class="ted_video" controls="controls">
+                            <source src={{ link }} type='video/mp4'>
+                        </video>
+                    </div>
+                    <p>
+                        "...{{ quote }}..."
+                    </p>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
 {% endblock %}
