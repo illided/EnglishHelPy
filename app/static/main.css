@@ -11,6 +11,7 @@ body {
 .usage-results {
     margin-top: 10px;
     margin-left: 120px;
+    margin-right: 120px;
 }
 
 .word_in_query {
