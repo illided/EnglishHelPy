@@ -1,3 +1,4 @@
+import os.path
 import re
 import sqlite3
 from typing import Optional, List, Tuple
@@ -14,8 +15,12 @@ nlp = spacy.load("en_core_web_sm")
 
 def get_db() -> sqlite3.Connection:
     db = getattr(g, '_database', None)
+    db_path = os.path.join(os.getcwd(), MAIN_DATABASE)
+    if not os.path.exists(db_path):
+        print("Main database not found. Trying to connect to test")
+        db_path = os.path.join(os.getcwd(), TEST_DATABASE)
     if db is None:
-        db = g._database = sqlite3.connect(MAIN_DATABASE)
+        db = g._database = sqlite3.connect(db_path)
     return db
 
 
@@ -30,7 +35,7 @@ def index():
         offset = 0
     limit = request.args.get('limit')
     if limit is None:
-        limit = 5
+        limit = 6
 
     word = process_query(query)
     if word is None:
@@ -89,4 +94,4 @@ def get_definition(word: str) -> Optional[dict]:
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
