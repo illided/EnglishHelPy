@@ -2,7 +2,7 @@
 Small tool written in Python and HTML for learning english.
 
 ## Create database
-HelPy comes with a prebuilt database of 200 videos. If you want to build
+HelPy comes with a prebuilt database of 400 videos. If you want to build
 your own (with more videos for examples), run:
 ```
 python3 db_filler/main.py
