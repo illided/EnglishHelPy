@@ -1,6 +1,8 @@
 import json
+import random
 import re
 import sqlite3
+from time import sleep
 from typing import List, Optional
 
 import requests
@@ -20,7 +22,7 @@ class TableLoader:
     def __init__(self, config, is_test):
         self.config = config
         self.is_test = is_test
-        self.nlp = spacy.load("en_core_web_trf")
+        self.nlp = spacy.load("en_core_web_sm")
 
         self.conn = None
         if is_test:
@@ -131,9 +133,11 @@ class TableLoader:
 
         for rec_id in pbar:
             try:
+                sleep(2 + random.uniform(-1, 1))  # adding random sleeps to avoid ddos defence
                 video_url = self.extract_video(rec_id)
                 video_id = self.insert_video(curs, video_url)
 
+                sleep(2 + random.uniform(-1, 1))
                 subtitles = self.load_subtitles(rec_id)
 
                 for quote in subtitles:

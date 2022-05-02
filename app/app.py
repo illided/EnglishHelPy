@@ -7,7 +7,7 @@ from flask import Flask, g, request, render_template
 app = Flask(__name__)
 MAIN_DATABASE = 'ted_quotes.db'
 TEST_DATABASE = 'ted_quotes_test.db'
-nlp = spacy.load("en_core_web_trf")
+nlp = spacy.load("en_core_web_sm")
 
 
 def get_db() -> sqlite3.Connection:
