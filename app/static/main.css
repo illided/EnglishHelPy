@@ -14,7 +14,6 @@ body {
 }
 
 .word_in_query {
-    /*font-size: large;*/
     color: darkslateblue;
 }
 
@@ -25,17 +24,16 @@ body {
 .ted_card {
     padding-bottom: 15px;
     padding-top: 15px;
-    margin-right: 15px;
-    width: 800px;
+    margin-right: 60px;
+    width: 750px;
     height: 300px;
     float: left;
 }
 
 .ted_quote {
-    /*margin-left: 30px;*/
-    float: right;
+    margin-left: 10px;
+    padding-left: 30px;
     text-align: right;
-    font-family: "Roboto Light", serif;
 }
 
 .ted_video {
@@ -44,8 +42,7 @@ body {
     float: left;
 }
 
-.video-mask{
-    padding: 10px;
+.video-mask {
     width: 480px;
     height: 270px;
     border-radius: 10px;
