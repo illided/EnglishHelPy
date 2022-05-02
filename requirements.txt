@@ -1,0 +1,5 @@
+requests~=2.22.0
+spacy~=3.3.0
+Flask~=2.1.2
+configparser~=5.1.0
+tqdm~=4.62.3
