@@ -32,6 +32,10 @@ def index():
 
     cur = get_db().cursor()
     links = get_link(cur, query, limit, offset)
+    if links is None:
+        return render_template("error.html", message="Wrong query")
+    if len(links) == 0:
+        return render_template("error.html", message="I don't have this word in my database")
     cur.close()
     return render_template('search_result.html', links=links)
 
@@ -49,7 +53,7 @@ def get_link(cursor: sqlite3.Cursor, query: str, limit: int, offset: int) -> Opt
         join subtitles on word_to_quote.quote_id=subtitles.ROWID
         join video_to_quote on video_to_quote.quote_id=word_to_quote.quote_id
         join videos on videos.ROWID = video_id
-        WHERE word = ? limit ? offset ?;
+        WHERE word = ? group by link limit ? offset ?;
         """
         , [word, limit, offset]
     )

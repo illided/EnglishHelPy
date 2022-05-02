@@ -9,11 +9,14 @@
     {% block head %}{% endblock %}
 </head>
 <body>
-<div class="input-group">
-    <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
-           aria-describedby="search-addon"/>
-    <button type="button" class="btn btn-outline-primary">Find usages</button>
-</div>
+<h1 class="main-title">English HelPy</h1>
+<form action="#" method="get">
+    <div class="input-group">
+        <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
+               aria-describedby="search-addon" name="query"/>
+        <button type="submit" class="btn btn-outline-primary">Find usages</button>
+    </div>
+</form>
 {% block body %}{% endblock %}
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
