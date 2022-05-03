@@ -39,7 +39,6 @@ body {
 .ted_video_src {
     height: 270px;
     width: 480px;
-    float: left;
 }
 
 .ted_video {
@@ -57,7 +56,7 @@ body {
     height: 270px;
     border-radius: 10px;
     overflow: hidden;
-    float: left;
+    /*float: left;*/
     /*margin-bottom: 10px;*/
 }
 
@@ -96,4 +95,8 @@ body {
 
 a:link {
     color: gray;
+}
+
+.card-text:last-child {
+     margin-bottom: 10px;
 }
