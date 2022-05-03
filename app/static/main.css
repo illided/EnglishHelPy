@@ -33,9 +33,7 @@ body {
 }
 
 .ted_quote {
-    margin: 20px 20px 20px 5px;
-    /*padding-left: 30px;*/
-    /*text-align: right;*/
+    margin: 15px 10px 10px;
 }
 
 .ted_video_src {
@@ -45,8 +43,7 @@ body {
 }
 
 .ted_video {
-    padding: 10px;
-    margin-bottom: 10px;
+    padding: 15px;
     object-fit: fill;
 }
 
@@ -61,7 +58,7 @@ body {
     border-radius: 10px;
     overflow: hidden;
     float: left;
-    margin-bottom: 10px;
+    /*margin-bottom: 10px;*/
 }
 
 .welcome_message {
@@ -77,4 +74,26 @@ body {
     padding-block: 20px;
     padding-left: 100px;
     padding-right: 100px;
+}
+
+.source_code_ref {
+    text-align: center;
+    color: gray;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-family: "IBM Plex Mono", monospace;
+}
+
+.bi-github {
+    width: 40px;
+    height: auto;
+}
+
+.bi-book {
+    height: 50px;
+    width: auto;
+}
+
+a:link {
+    color: gray;
 }

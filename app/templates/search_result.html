@@ -16,10 +16,10 @@
         {% if links|length != 0 %}
             <div class="row gy-4">
                 {% for link, quote in links %}
-                    <div class="col" style="min-width: 720px; max-width: 900px">
+                    <div class="col-md-6" style="min-width: 740px; max-width: 900px">
                         <div class="card">
                             <div class="row no-gutters">
-                                <div class="col-lg-8 d-flex justify-content-center">
+                                <div class="col-lg-8 d-flex">
                                     <div class="ted_video">
                                         <div class="video-mask">
                                             <video class="ted_video_src" src={{ link }} type="video/mp4"
