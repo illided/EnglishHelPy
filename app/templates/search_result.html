@@ -16,7 +16,7 @@
         {% if links|length != 0 %}
             <div class="row gy-4">
                 {% for link, quote in links %}
-                    <div class="col-lg-6 col-md-12 col-sm-12">
+                    <div class="col" style="min-width: 720px; max-width: 900px">
                         <div class="card">
                             <div class="row no-gutters">
                                 <div class="col-lg-8 d-flex justify-content-center">
@@ -33,18 +33,6 @@
                             </div>
                         </div>
                     </div>
-
-                    {#                <div class="card-"#}
-                    {#                <div class="ted_card">#}
-                    {#                    <div class="video-mask">#}
-                    {#                        <video class="ted_video" controls="controls">#}
-                    {#                            <source src={{ link }} type='video/mp4'>#}
-                    {#                        </video>#}
-                    {#                    </div>#}
-                    {#                    <p class="ted_quote">#}
-                    {#                        "...{{ quote }}..."#}
-                    {#                    </p>#}
-                    {#                </div>#}
                 {% endfor %}
             </div>
         {% endif %}
