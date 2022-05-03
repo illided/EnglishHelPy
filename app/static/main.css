@@ -33,15 +33,26 @@ body {
 }
 
 .ted_quote {
-    margin-left: 10px;
-    padding-left: 30px;
-    text-align: right;
+    margin: 20px 20px 20px 5px;
+    /*padding-left: 30px;*/
+    /*text-align: right;*/
 }
 
-.ted_video {
+.ted_video_src {
     height: 270px;
     width: 480px;
     float: left;
+}
+
+.ted_video {
+    padding: 10px;
+    margin-bottom: 10px;
+    object-fit: fill;
+}
+
+.card {
+    margin-bottom: 30px;
+    border-radius: 10px;
 }
 
 .video-mask {
@@ -50,6 +61,7 @@ body {
     border-radius: 10px;
     overflow: hidden;
     float: left;
+    margin-bottom: 10px;
 }
 
 .welcome_message {

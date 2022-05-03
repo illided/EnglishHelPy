@@ -14,18 +14,39 @@
             {% endfor %}
         {% endif %}
         {% if links|length != 0 %}
-            {% for link, quote in links %}
-                <div class="ted_card">
-                    <div class="video-mask">
-                        <video class="ted_video" controls="controls">
-                            <source src={{ link }} type='video/mp4'>
-                        </video>
+            <div class="row gy-4">
+                {% for link, quote in links %}
+                    <div class="col-lg-6 col-md-12 col-sm-12">
+                        <div class="card">
+                            <div class="row no-gutters">
+                                <div class="col-lg-8 d-flex justify-content-center">
+                                    <div class="ted_video">
+                                        <div class="video-mask">
+                                            <video class="ted_video_src" src={{ link }} type="video/mp4"
+                                                   controls></video>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 text-center">
+                                    <p class="card-text ted_quote">"...{{ quote }}..."</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <p class="ted_quote">
-                        "...{{ quote }}..."
-                    </p>
-                </div>
-            {% endfor %}
+
+                    {#                <div class="card-"#}
+                    {#                <div class="ted_card">#}
+                    {#                    <div class="video-mask">#}
+                    {#                        <video class="ted_video" controls="controls">#}
+                    {#                            <source src={{ link }} type='video/mp4'>#}
+                    {#                        </video>#}
+                    {#                    </div>#}
+                    {#                    <p class="ted_quote">#}
+                    {#                        "...{{ quote }}..."#}
+                    {#                    </p>#}
+                    {#                </div>#}
+                {% endfor %}
+            </div>
         {% endif %}
     </div>
 {% endblock %}
